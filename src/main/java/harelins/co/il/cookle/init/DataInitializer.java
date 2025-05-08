@@ -15,6 +15,10 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Set;
 
+/**
+ * Component responsible for initializing the database with sample recipe data.
+ * Implements {@link CommandLineRunner} to execute initialization logic on application startup.
+ */
 @Component
 @RequiredArgsConstructor
 public class DataInitializer implements CommandLineRunner {
@@ -24,6 +28,12 @@ public class DataInitializer implements CommandLineRunner {
     private final InstructionRepository instructionRepository;
     private final RecipeIngredientRepository recipeIngredientRepository;
 
+    /**
+     * Initializes the database by clearing existing data and populating it with sample recipes.
+     *
+     * @param args command-line arguments
+     * @throws Exception if an error occurs during initialization
+     */
     @Override
     @Transactional
     public void run(String... args) throws Exception {
@@ -305,6 +315,13 @@ public class DataInitializer implements CommandLineRunner {
         recipeRepository.save(pancakes);
     }
 
+    /**
+     * Creates and saves an ingredient with the specified name and amount.
+     *
+     * @param name   the name of the ingredient
+     * @param amount the amount of the ingredient (e.g., in grams or units)
+     * @return the saved {@link Ingredient} entity
+     */
     private Ingredient createIngredient(String name, Number amount) {
         Ingredient ingredient = new Ingredient();
         ingredient.setName(name);
@@ -312,6 +329,13 @@ public class DataInitializer implements CommandLineRunner {
         return ingredientRepository.save(ingredient);
     }
 
+    /**
+     * Creates and saves a relationship between a recipe and an ingredient.
+     *
+     * @param recipe     the {@link Recipe} to associate with the ingredient
+     * @param ingredient the {@link Ingredient} to associate with the recipe
+     * @return the saved {@link RecipeIngredient} entity
+     */
     private RecipeIngredient createRecipeIngredient(Recipe recipe, Ingredient ingredient) {
         RecipeIngredient ri = new RecipeIngredient();
         ri.setRecipe(recipe);
@@ -319,6 +343,14 @@ public class DataInitializer implements CommandLineRunner {
         return recipeIngredientRepository.save(ri);
     }
 
+    /**
+     * Creates and saves an instruction for a recipe with the specified step and description.
+     *
+     * @param recipe      the {@link Recipe} to associate with the instruction
+     * @param step        the step number of the instruction
+     * @param description the description of the instruction
+     * @return the saved {@link Instruction} entity
+     */
     private Instruction createInstruction(Recipe recipe, int step, String description) {
         Instruction instruction = new Instruction();
         instruction.setRecipe(recipe);

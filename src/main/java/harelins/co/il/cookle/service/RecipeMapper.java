@@ -6,8 +6,18 @@ import harelins.co.il.cookle.dto.RecipeDto;
 import harelins.co.il.cookle.model.Recipe;
 import org.springframework.stereotype.Component;
 
+/**
+ * Service component for mapping {@link Recipe} entities to {@link RecipeDto} objects.
+ */
 @Component
 public class RecipeMapper {
+
+    /**
+     * Converts a {@link Recipe} entity to a {@link RecipeDto} object.
+     *
+     * @param recipe the recipe entity to convert
+     * @return the corresponding {@link RecipeDto} object
+     */
     public RecipeDto toDto(Recipe recipe) {
         RecipeDto dto = new RecipeDto();
         dto.setId(recipe.getId());
