@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Cookle Recipe Search</title>
+</head>
+<body>
+<h1>Cookle Recipe Search</h1>
+
+<form id="searchForm">
+    <input type="text" id="searchQuery" placeholder="Enter recipe name...">
+    <button type="submit">Search</button>
+</form>
+
+<div id="results"></div>
+
+<script>
+    document.getElementById('searchForm').addEventListener('submit', function (e) {
+        e.preventDefault();
+        const query = document.getElementById('searchQuery').value;
+
+        fetch(`/project/api/recipes/search?query=${encodeURIComponent(query)}`)
+            .then(response => response.json())
+            .then(recipes => {
+                const resultsDiv = document.getElementById('results');
+                resultsDiv.innerHTML = '';
+
+                if (recipes.length === 0) {
+                    resultsDiv.innerHTML = '<p>No recipes found</p>';
+                    return;
+                }
+
+                recipes.forEach(recipe => {
+                    const recipeDiv = document.createElement('div');
+                    recipeDiv.innerHTML = `
+                        <h3>${recipe.name}</h3>
+                        <p>Yield: ${recipe.yield} servings</p>
+                        <h4>Ingredients:</h4>
+                        <ul>
+                            ${recipe.ingredients.map(i =>
+                            `<li>${i.name}: ${i.amount}</li>`
+                    ).join('')}
+                        </ul>
+                        <h4>Instructions:</h4>
+                        <ol>
+                            ${recipe.instructions
+                            .sort((a, b) => a.step - b.step)
+                            .map(i =>
+                                    `<li>${i.description}</li>`
+                            ).join('')}
+                        </ol>
+                        <hr>
+                    `;
+                    resultsDiv.appendChild(recipeDiv);
+                });
+            });
+    });
+</script>
+</body>
+</html>
