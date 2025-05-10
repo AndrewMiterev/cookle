@@ -24,4 +24,7 @@ public class RecipeDto {
 
     /** The list of instructions for preparing the recipe. */
     private List<InstructionDto> instructions;
+
+    /** from witch server */
+    private String serverUrl;
 }

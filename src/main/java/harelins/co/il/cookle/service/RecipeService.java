@@ -2,40 +2,26 @@ package harelins.co.il.cookle.service;
 
 import harelins.co.il.cookle.exception.ResourceNotFoundException;
 import harelins.co.il.cookle.model.Recipe;
-import harelins.co.il.cookle.repository.RecipeRepository;
-import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 /**
- * Service class for managing recipe-related business logic.
+ * Service interface for recipe-related operations
  */
-@Service
-@RequiredArgsConstructor
-public class RecipeService {
-
-    private final RecipeRepository recipeRepository;
+public interface RecipeService {
 
     /**
-     * Searches for recipes whose names contain the specified string, ignoring case.
-     *
-     * @param namePart the partial name to search for
-     * @return a list of {@link Recipe} entities matching the search criteria
+     * Searches recipes by name containing the given string (case insensitive)
+     * @param namePart partial name to search for
+     * @return list of matching recipes
      */
-    public List<Recipe> searchRecipes(String namePart) {
-        return recipeRepository.findByNameContainingIgnoreCase(namePart);
-    }
+    List<Recipe> searchRecipes(String namePart);
 
     /**
-     * Retrieves a recipe by its ID.
-     *
-     * @param id the ID of the recipe to retrieve
-     * @return the {@link Recipe} entity
-     * @throws ResourceNotFoundException if the recipe is not found
+     * Retrieves recipe details by ID
+     * @param id recipe ID
+     * @return recipe entity
+     * @throws ResourceNotFoundException if recipe not found
      */
-    public Recipe getRecipeDetails(Long id) {
-        return recipeRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("Recipe not found"));
-    }
+    Recipe getRecipeDetails(Long id) throws ResourceNotFoundException;
 }
