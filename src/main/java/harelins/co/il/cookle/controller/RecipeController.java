@@ -3,7 +3,7 @@ package harelins.co.il.cookle.controller;
 import harelins.co.il.cookle.dto.RecipeDto;
 import harelins.co.il.cookle.exception.ResourceNotFoundException;
 import harelins.co.il.cookle.model.Recipe;
-import harelins.co.il.cookle.service.RecipeMapper;
+import harelins.co.il.cookle.service.impl.RecipeMapper;
 import harelins.co.il.cookle.service.RecipeService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;

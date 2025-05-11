@@ -1,8 +1,9 @@
-package harelins.co.il.cookle.service;
+package harelins.co.il.cookle.service.impl;
 
 import harelins.co.il.cookle.exception.ResourceNotFoundException;
 import harelins.co.il.cookle.model.Recipe;
 import harelins.co.il.cookle.repository.RecipeRepository;
+import harelins.co.il.cookle.service.RecipeService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

@@ -1,4 +1,4 @@
-package harelins.co.il.cookle.service;
+package harelins.co.il.cookle.service.impl;
 
 import harelins.co.il.cookle.dto.IngredientDto;
 import harelins.co.il.cookle.dto.InstructionDto;
