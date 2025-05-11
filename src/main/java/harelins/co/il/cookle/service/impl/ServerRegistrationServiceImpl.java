@@ -23,7 +23,7 @@ public class ServerRegistrationServiceImpl implements ServerRegistrationService 
     private final RestTemplate restTemplate;
     private final ServersConfig serversConfig;
 
-    @Scheduled(fixedRate = 30000) // check all 30 sec
+    @Scheduled(fixedRate = 30000, initialDelay = 30000) // check all 30 sec
     @Override
     public void removeInactiveServers() {
         List<String> activeServers = serverListService.getAllServers().stream()
